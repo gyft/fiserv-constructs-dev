@@ -1,0 +1,32 @@
+Name: onPushToMainDeployPipeline
+SchemaVersion: "1.0"
+
+Triggers:
+  - Type: Push
+    Branches:
+      - main
+
+Actions:
+  BuildAndTest:
+    Compute:
+      Type: Lambda
+      Fleet: Linux.x86-64.Large
+    Identifier: aws/build@v1
+    Inputs:
+      Sources:
+        - WorkflowSource
+    Outputs:
+      Artifacts:
+        - Name: build
+          Files:
+            - cdk/**/*
+      AutoDiscoverReports:
+        ReportNamePrefix: Test
+        IncludePaths:
+          - coverage/**
+          - reports/**
+    Configuration:
+      Steps:
+        - Run: npm install
+        - Run: npm test -- --coverage --watchAll=false --testResultsProcessor="jest-junit"
+        - Run: npm run build
