@@ -19,7 +19,7 @@ Actions:
       Artifacts:
         - Name: build
           Files:
-            - cdk/**/*
+            - cdk.out/**/*
       AutoDiscoverReports:
         ReportNamePrefix: Test
         IncludePaths:
