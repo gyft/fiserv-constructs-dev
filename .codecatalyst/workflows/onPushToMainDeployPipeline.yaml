@@ -47,25 +47,25 @@ Actions:
     Inputs:
       Sources:
         - WorkflowSource
-#   CDKDeploy:
-#     Compute:
-#       Type: Lambda
-#       Fleet: Linux.x86-64.Large
-#     Identifier: aws/cdk-deploy@v1
-#     DependsOn:
-#       - CDKBootstrapAction
-#       - BuildAndTest
-#     Inputs:
-#       Artifacts:
-#         - build
-#     Configuration:
-#       StackName: InnerSourceStack
-#       Region: us-west-2
-#       Context: '{"stack_name": "InnerSourceStack"}'
-#       CdkRootPath: cdk
-#     Environment:
-#       Name: dev
-#       Connections:
-#         - Name: "254688924456"
-#           Role: CodeCatalystPreviewDevelopmentAdministrator-zc9k99
+  CDKDeploy:
+    Compute:
+      Type: Lambda
+      Fleet: Linux.x86-64.Large
+    Identifier: aws/cdk-deploy@v1
+    DependsOn:
+      - CDKBootstrapAction
+      - BuildAndTest
+    Inputs:
+      Artifacts:
+        - build
+    Configuration:
+      StackName: InnerSourceStack
+      Region: us-west-2
+      Context: '{"stack_name": "InnerSourceStack"}'
+      CdkRootPath: cdk.out
+    Environment:
+      Name: dev
+      Connections:
+        - Name: "254688924456"
+          Role: CodeCatalystPreviewDevelopmentAdministrator-zc9k99
 
