@@ -7,41 +7,8 @@ Triggers:
       - main
 
 Actions:
-  BuildAndTest:
-    Compute:
-      Type: Lambda
-      Fleet: Linux.x86-64.Large
-    Identifier: aws/build@v1
-    Inputs:
-      Sources:
-        - WorkflowSource
-    Configuration:
-      Steps:
-        - Run: npm ci
-        - Run: npm run test
-  CDKBootstrapAction:
-    Compute:
-      Type: Lambda
-      Fleet: Linux.x86-64.Large
-    Identifier: aws/cdk-bootstrap@v1
-    Configuration:
-      Region: us-west-2
-    Environment:
-      Name: dev
-      Connections:
-        - Name: "254688924456"
-          Role: CodeCatalystPreviewDevelopmentAdministrator-zc9k99
-    Inputs:
-      Sources:
-        - WorkflowSource
-  CDKDeploy:
-    Compute:
-      Type: Lambda
-      Fleet: Linux.x86-64.Large
+  Deploy:
     Identifier: aws/cdk-deploy@v1
-    DependsOn:
-      - CDKBootstrapAction
-      - BuildAndTest
     Inputs:
       Sources:
         - WorkflowSource
@@ -54,4 +21,3 @@ Actions:
       Connections:
         - Name: "254688924456"
           Role: CodeCatalystPreviewDevelopmentAdministrator-zc9k99
-
