@@ -61,8 +61,8 @@ Actions:
     Configuration:
       StackName: InnerSourceStack
       Region: us-west-2
-      Context: '{"stack_name": "InnerSourceStack"}'
-      CdkRootPath: cdk.out
+    #   Context: '{"stack_name": "InnerSourceStack"}'
+    #   CdkRootPath: cdk.out
     Environment:
       Name: dev
       Connections:
